@@ -48,10 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('.nav');
     
     window.addEventListener('scroll', function() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         if (window.scrollY > 50) {
-            nav.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            nav.style.backgroundColor = isDark ? 'rgba(15, 23, 42, 0.98)' : 'rgba(255, 255, 255, 0.98)';
         } else {
-            nav.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            nav.style.backgroundColor = isDark ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
         }
     });
 
@@ -147,13 +148,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize lazy loading
     lazyLoadImages();
 
-    // Theme toggle functionality (for future dark mode)
+    // Theme toggle functionality
     const initThemeToggle = () => {
-        const theme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', theme);
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('.theme-icon');
         
-        // Theme toggle button event listener can be added here
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        
+        // Update nav background based on initial theme
+        const isDark = currentTheme === 'dark';
+        nav.style.backgroundColor = isDark ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+        
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            
+            // Update nav background
+            nav.style.backgroundColor = newTheme === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+        });
     };
+    
+    // Initialize theme toggle
+    initThemeToggle();
 
     // Console welcome message
     console.log('%c Welcome to Prawal Sharma\'s Portfolio! ', 'background: #2563eb; color: white; padding: 10px; border-radius: 5px; font-size: 16px;');
