@@ -80,24 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 
-    // Add typing effect to hero title (optional enhancement)
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const text = heroTitle.innerHTML;
-        heroTitle.innerHTML = '';
-        
-        let index = 0;
-        function typeWriter() {
-            if (index < text.length) {
-                heroTitle.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        
-        // Start typing effect after a short delay
-        setTimeout(typeWriter, 500);
-    }
+    // Typing effect removed to prevent HTML tag display issues
+    // The hero title now displays immediately with proper HTML formatting
 
     // Add hover effect to skill tags
     const skillTags = document.querySelectorAll('.skill-tag');
