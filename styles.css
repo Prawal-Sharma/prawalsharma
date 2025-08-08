@@ -205,9 +205,9 @@ body {
 
 /* Profile Image */
 .profile-image-container {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 2rem;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 2.5rem;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 0 0 4px var(--bg-primary), 0 0 0 6px var(--border-color);
